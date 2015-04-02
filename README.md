@@ -1,3 +1,3 @@
-LI-Pagador-Retirada
-===================
-LI-Pagador-Retirada
+LI-Pagador-Entrega
+==================
+LI-Pagador-Entrega

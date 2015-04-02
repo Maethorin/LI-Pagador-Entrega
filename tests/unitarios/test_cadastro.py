@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 import unittest
-from pagador_retirada import cadastro
+from pagador_entrega import cadastro
 
 
-class FormularioRetirada(unittest.TestCase):
+class FormularioEntrega(unittest.TestCase):
     def __init__(self, *args, **kwargs):
-        super(FormularioRetirada, self).__init__(*args, **kwargs)
-        self.formulario = cadastro.FormularioRetirada()
+        super(FormularioEntrega, self).__init__(*args, **kwargs)
+        self.formulario = cadastro.FormularioEntrega()
 
     def test_deve_ter_bandeiras(self):
         self.formulario.tipos.nome.should.be.equal('json')

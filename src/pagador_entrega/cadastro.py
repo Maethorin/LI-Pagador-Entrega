@@ -58,7 +58,7 @@ class DescontoValidador(cadastro.ValidadorBase):
         return not self.erros
 
 
-class FormularioRetirada(cadastro.Formulario):
+class FormularioEntrega(cadastro.Formulario):
     tipos = cadastro.CampoFormulario('json', ordem=0, tipo=cadastro.TipoDeCampo.oculto, formato=cadastro.FormatoDeCampo.json, opcoes=TIPOS, validador=TiposValidador)
     ativo = cadastro.CampoFormulario('ativo', u'Pagamento ativo?', ordem=1, tipo=cadastro.TipoDeCampo.boleano)
     valor_minimo_aceitado = cadastro.CampoFormulario('valor_minimo_aceitado', u'Valor mínimo', requerido=False, decimais=2, ordem=2, tipo=cadastro.TipoDeCampo.decimal, texto_ajuda=u'Informe o valor mínimo para exibir esta forma de pagamento.')

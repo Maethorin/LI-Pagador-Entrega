@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from pagador import entidades
-from pagador_retirada import cadastro
+from pagador_entrega import cadastro
 
 CODIGO_GATEWAY = 13
 
@@ -17,4 +17,4 @@ class ConfiguracaoMeioPagamento(entidades.ConfiguracaoMeioPagamento):
             self.json = []
 
         if not self.eh_listagem:
-            self.formulario = cadastro.FormularioRetirada()
+            self.formulario = cadastro.FormularioEntrega()

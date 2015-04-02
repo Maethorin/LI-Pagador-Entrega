@@ -7,11 +7,11 @@ def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
 setup(
-    name='li-pagador-retirada',
+    name='li-pagador-entrega',
     version='0.0.1',
     url='https://github.com/lojaintegrada/LI-Pagador-Entrega',
     license='MIT',
-    description=u'Meio de pagamento usado na retirada em loja',
+    description=u'Meio de pagamento usado na entrega em loja',
     author=u'Loja Integrada',
     author_email='suporte@lojaintegrada.com.br',
     long_description=read('README.md'),
@@ -29,6 +29,6 @@ setup(
     packages=find_packages('src'),
     package_dir={'': 'src'},
     include_package_data=True,
-    package_data={'pagador_retirada': ['extensao/templates/*']},
+    package_data={'pagador_entrega': ['extensao/templates/*']},
     install_requires=['distribute', 'li-pagador'],
 )
