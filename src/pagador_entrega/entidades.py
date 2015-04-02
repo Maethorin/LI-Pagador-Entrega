@@ -10,8 +10,8 @@ class ConfiguracaoMeioPagamento(entidades.ConfiguracaoMeioPagamento):
         self.campos = ['ativo', 'valor_minimo_aceitado', 'desconto', 'desconto_valor', 'aplicar_no_total', 'json']
         self.codigo_gateway = CODIGO_GATEWAY
         self.eh_gateway = True
+        self.tipos = cadastro.TIPOS
         super(ConfiguracaoMeioPagamento, self).__init__(loja_id, codigo_pagamento, eh_listagem=eh_listagem)
-        self._tipos = []
 
         if not self.json:
             self.json = []

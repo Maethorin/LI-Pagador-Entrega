@@ -2,30 +2,24 @@
 from li_common.padroes import cadastro
 
 TIPOS = [
-    (1, 'dinheiro', 'Dinheiro'),
-    (2, 'cheque', 'Cheque'),
-    (3, 'cartao_debito_mastercard', 'Cartão de débito MasterCard'),
-    (4, 'cartao_debito_visa', 'Cartão de débito Visa'),
-    (5, 'cartao_debito_elo', 'Cartão de débito Elo'),
-    (6, 'cartao_debito_cabal', 'Cartão de débito Cabal'),
-    (7, 'cartao_credito_mastercard', 'Cartão de crédito MasterCard'),
-    (8, 'cartao_credito_visa', 'Cartão de crédito Visa'),
-    (9, 'cartao_credito_elo', 'Cartão de crédito Elo'),
-    (10, 'cartao_credito_cabal', 'Cartão de crédito Cabal'),
-    (11, 'cartao_credito_hipercard', 'Cartão de crédito Hipercard'),
-    (12, 'cartao_credito_diners', 'Cartão de crédito Diners'),
-    (13, 'cartao_credito_americanexpress', 'Cartão de crédito American Express'),
-    (14, 'cartao_sodexo_refeicao', 'Cartão Sodexo Refeição'),
-    (15, 'cartao_sodexo_alimentacao', 'Cartão Sodexo Alimentação'),
-    (16, 'cartao_alelo_refeicao', 'Cartão Alelo Refeição'),
-    (17, 'cartao_alelo_alimentacao', 'Cartão Alelo Alimentação'),
+    {'id': 1, 'value': 'dinheiro', 'label': 'Dinheiro'},
+    {'id': 2, 'value': 'cheque', 'label': 'Cheque'},
+    {'id': 3, 'value': 'cartao_debito_mastercard', 'label': 'Cartão de débito MasterCard'},
+    {'id': 4, 'value': 'cartao_debito_visa', 'label': 'Cartão de débito Visa'},
+    {'id': 5, 'value': 'cartao_debito_elo', 'label': 'Cartão de débito Elo'},
+    {'id': 6, 'value': 'cartao_debito_cabal', 'label': 'Cartão de débito Cabal'},
+    {'id': 7, 'value': 'cartao_credito_mastercard', 'label': 'Cartão de crédito MasterCard'},
+    {'id': 8, 'value': 'cartao_credito_visa', 'label': 'Cartão de crédito Visa'},
+    {'id': 9, 'value': 'cartao_credito_elo', 'label': 'Cartão de crédito Elo'},
+    {'id': 10, 'value': 'cartao_credito_cabal', 'label': 'Cartão de crédito Cabal'},
+    {'id': 11, 'value': 'cartao_credito_hipercard', 'label': 'Cartão de crédito Hipercard'},
+    {'id': 12, 'value': 'cartao_credito_diners', 'label': 'Cartão de crédito Diners'},
+    {'id': 13, 'value': 'cartao_credito_americanexpress', 'label': 'Cartão de crédito American Express'},
+    {'id': 14, 'value': 'cartao_sodexo_refeicao', 'label': 'Cartão Sodexo Refeição'},
+    {'id': 15, 'value': 'cartao_sodexo_alimentacao', 'label': 'Cartão Sodexo Alimentação'},
+    {'id': 16, 'value': 'cartao_alelo_refeicao', 'label': 'Cartão Alelo Refeição'},
+    {'id': 17, 'value': 'cartao_alelo_alimentacao', 'label': 'Cartão Alelo Alimentação'},
 ]
-
-TIPO_BASE = {
-    'id': None,
-    'nome': None,
-    'ativo': False,
-}
 
 
 class TiposValidador(cadastro.ValidadorBase):
@@ -35,14 +29,6 @@ class TiposValidador(cadastro.ValidadorBase):
         if type(self.valor) is not list:
             valido = False
             self.erros['lista'] = 'Os tipos devem ser uma lista.'
-        for tipo in self.valor:
-            erros = []
-            for chave in TIPO_BASE:
-                if chave not in tipo:
-                    valido = False
-                    erros.append(u'Não foi enviado o atributo {} do tipo {}'.format(chave, tipo))
-            if erros:
-                self.erros['atributos'] = erros
         return valido
 
 
@@ -59,9 +45,9 @@ class DescontoValidador(cadastro.ValidadorBase):
 
 
 class FormularioEntrega(cadastro.Formulario):
-    tipos = cadastro.CampoFormulario('json', ordem=0, tipo=cadastro.TipoDeCampo.oculto, formato=cadastro.FormatoDeCampo.json, opcoes=TIPOS, validador=TiposValidador)
+    tipos = cadastro.CampoFormulario('json', ordem=0, tipo=cadastro.TipoDeCampo.oculto, formato=cadastro.FormatoDeCampo.json, validador=TiposValidador)
     ativo = cadastro.CampoFormulario('ativo', u'Pagamento ativo?', ordem=1, tipo=cadastro.TipoDeCampo.boleano)
     valor_minimo_aceitado = cadastro.CampoFormulario('valor_minimo_aceitado', u'Valor mínimo', requerido=False, decimais=2, ordem=2, tipo=cadastro.TipoDeCampo.decimal, texto_ajuda=u'Informe o valor mínimo para exibir esta forma de pagamento.')
     tem_desconto = cadastro.CampoFormulario('desconto', u'Usar desconto?', requerido=False, ordem=3, tipo=cadastro.TipoDeCampo.boleano, texto_ajuda=u'Define se esta forma de pagamento usará desconto.')
     desconto_valor = cadastro.CampoFormulario('desconto_valor', u'Desconto aplicado', requerido=False, ordem=4, tipo=cadastro.TipoDeCampo.decimal, validador=DescontoValidador)
-    aplicar_no_total = cadastro.CampoFormulario('aplicar_no_total',  u'Aplicar no total?', requerido=False, ordem=5, tipo=cadastro.TipoDeCampo.boleano, texto_ajuda=u'Aplicar desconto no total da compra (incluir por exemplo o frete).')
+    aplicar_no_total = cadastro.CampoFormulario('aplicar_no_total', u'Aplicar no total?', requerido=False, ordem=5, tipo=cadastro.TipoDeCampo.boleano, texto_ajuda=u'Aplicar desconto no total da compra (incluir por exemplo o frete).')

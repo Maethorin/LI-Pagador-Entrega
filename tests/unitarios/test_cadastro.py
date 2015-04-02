@@ -8,12 +8,11 @@ class FormularioEntrega(unittest.TestCase):
         super(FormularioEntrega, self).__init__(*args, **kwargs)
         self.formulario = cadastro.FormularioEntrega()
 
-    def test_deve_ter_bandeiras(self):
+    def test_deve_ter_tipos(self):
         self.formulario.tipos.nome.should.be.equal('json')
         self.formulario.tipos.ordem.should.be.equal(0)
         self.formulario.tipos.formato.should.be.equal(cadastro.cadastro.FormatoDeCampo.json)
         self.formulario.tipos.tipo.should.be.equal(cadastro.cadastro.TipoDeCampo.oculto)
-        self.formulario.tipos.opcoes.should.be.equal(cadastro.TIPOS)
         self.formulario.tipos.validador.should.be.equal(cadastro.TiposValidador)
 
     def test_deve_ter_ativo(self):
@@ -55,19 +54,8 @@ class ValidadorBancos(unittest.TestCase):
         validador.erros.should.contain('lista')
         validador.erros['lista'].should.be.equal('Os tipos devem ser uma lista.')
 
-    def test_deve_adicionar_erro_para_atributos_faltando(self):
-        validador = cadastro.TiposValidador(valor=['faltando'])
-        validador.eh_valido.should.be.equal(False)
-        validador.erros.should.be.equal({
-            'atributos': [
-                u'Não foi enviado o atributo ativo do tipo faltando',
-                u'Não foi enviado o atributo id do tipo faltando',
-                u'Não foi enviado o atributo nome do tipo faltando',
-            ]
-        })
-
     def test_deve_ser_valido_se_conter_todos_os_atributos(self):
-        validador = cadastro.TiposValidador(valor=[cadastro.TIPO_BASE.copy()])
+        validador = cadastro.TiposValidador(valor=[1,2,3,4])
         validador.eh_valido.should.be.equal(True)
         validador.erros.should.be.empty
 

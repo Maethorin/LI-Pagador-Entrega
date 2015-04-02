@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 import unittest
 import mock
-from pagador_entrega import entidades
+from pagador_entrega import cadastro, entidades
+
 
 class EntregaConfiguracaoMeioPagamento(unittest.TestCase):
     def __init__(self, *args, **kwargs):
@@ -18,7 +19,7 @@ class EntregaConfiguracaoMeioPagamento(unittest.TestCase):
         entidades.ConfiguracaoMeioPagamento(234).codigo_gateway.should.be.equal(self.codigo_gateway)
 
     @mock.patch('pagador_entrega.entidades.ConfiguracaoMeioPagamento.preencher_gateway', autospec=True)
-    def test_deve_preencher_gateway_na_inicializacao(self, preencher_mock):
+    def test_deve_definir_gateway_na_inicializacao(self, preencher_mock):
         configuracao = entidades.ConfiguracaoMeioPagamento(234)
         preencher_mock.assert_called_with(configuracao, self.codigo_gateway, self.campos)
 
@@ -28,6 +29,12 @@ class EntregaConfiguracaoMeioPagamento(unittest.TestCase):
         configuracao.formulario.should.be.a('pagador_entrega.cadastro.FormularioEntrega')
 
     @mock.patch('pagador_entrega.entidades.ConfiguracaoMeioPagamento.preencher_gateway', mock.MagicMock())
+    def test_deve_definir_tipos_na_inicializacao(self):
+        configuracao = entidades.ConfiguracaoMeioPagamento(234)
+        configuracao.tipos.should.be.equal(cadastro.TIPOS)
+
+    @mock.patch('pagador_entrega.entidades.ConfiguracaoMeioPagamento.preencher_gateway', mock.MagicMock())
     def test_deve_ser_aplicacao(self):
         configuracao = entidades.ConfiguracaoMeioPagamento(234)
         configuracao.eh_aplicacao.should.be.falsy
+
