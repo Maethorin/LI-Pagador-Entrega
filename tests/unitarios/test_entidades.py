@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import unittest
 import mock
-from pagador_entrega import cadastro, entidades
+from pagador_entrega import entidades
 
 
 class EntregaConfiguracaoMeioPagamento(unittest.TestCase):
@@ -31,10 +31,25 @@ class EntregaConfiguracaoMeioPagamento(unittest.TestCase):
     @mock.patch('pagador_entrega.entidades.ConfiguracaoMeioPagamento.preencher_gateway', mock.MagicMock())
     def test_deve_definir_tipos_na_inicializacao(self):
         configuracao = entidades.ConfiguracaoMeioPagamento(234)
-        configuracao.tipos.should.be.equal(cadastro.TIPOS)
+        configuracao.tipos.should.be.equal(entidades.TIPOS)
 
     @mock.patch('pagador_entrega.entidades.ConfiguracaoMeioPagamento.preencher_gateway', mock.MagicMock())
     def test_deve_ser_aplicacao(self):
         configuracao = entidades.ConfiguracaoMeioPagamento(234)
         configuracao.eh_aplicacao.should.be.falsy
+
+
+class EntregaMontandoMalote(unittest.TestCase):
+    def setUp(self):
+        self.loja_id = 234
+        self.malote = entidades.Malote(mock.MagicMock(loja_id=self.loja_id))
+        self.pedido = mock.MagicMock()
+        self.pedido.numero = 1234
+
+    def test_deve_montar_conteudo(self):
+        dados = {'tipo_pagamento': 'Cartão de débito MasterCard', 'valor_troco': ''}
+        self.malote.monta_conteudo(self.pedido, parametros_contrato=None, dados=dados)
+        self.malote.to_dict().should.be.equal(dados)
+
+
 
