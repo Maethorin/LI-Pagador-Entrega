@@ -26,12 +26,18 @@ class EntregaConfiguracaoMeioPagamento(unittest.TestCase):
     @mock.patch('pagador_entrega.entidades.ConfiguracaoMeioPagamento.preencher_gateway', mock.MagicMock())
     def test_deve_definir_formulario_na_inicializacao(self):
         configuracao = entidades.ConfiguracaoMeioPagamento(234)
+        configuracao.eh_listagem.should.be.falsy
         configuracao.formulario.should.be.a('pagador_entrega.cadastro.FormularioEntrega')
 
     @mock.patch('pagador_entrega.entidades.ConfiguracaoMeioPagamento.preencher_gateway', mock.MagicMock())
     def test_deve_definir_tipos_na_inicializacao(self):
         configuracao = entidades.ConfiguracaoMeioPagamento(234)
         configuracao.tipos.should.be.equal(entidades.TIPOS)
+
+    @mock.patch('pagador_entrega.entidades.ConfiguracaoMeioPagamento.preencher_gateway', mock.MagicMock())
+    def test_deve_definir_json_na_inicializacao(self):
+        configuracao = entidades.ConfiguracaoMeioPagamento(234)
+        configuracao.json.should.be.equal([])
 
     @mock.patch('pagador_entrega.entidades.ConfiguracaoMeioPagamento.preencher_gateway', mock.MagicMock())
     def test_deve_ser_aplicacao(self):
