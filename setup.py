@@ -30,5 +30,5 @@ setup(
     package_dir={'': 'src'},
     include_package_data=True,
     package_data={'pagador_entrega': ['extensao/templates/*']},
-    install_requires=['distribute', 'li-pagador==2.1.1'],
+    install_requires=['distribute', 'li-pagador'],
 )
