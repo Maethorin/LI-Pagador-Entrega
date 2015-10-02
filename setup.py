@@ -8,7 +8,7 @@ def read(fname):
 
 setup(
     name='li-pagador-entrega',
-    version='0.1.0',
+    version='0.1.1',
     url='https://github.com/lojaintegrada/LI-Pagador-Entrega',
     license='MIT',
     description=u'Meio de pagamento usado na entrega em loja',
