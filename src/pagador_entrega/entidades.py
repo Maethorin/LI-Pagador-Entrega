@@ -37,6 +37,10 @@ class Malote(entidades.Malote):
 
 
 class ConfiguracaoMeioPagamento(entidades.ConfiguracaoMeioPagamento):
+    modos_pagamento_aceitos = {
+        'outros': ['entrega'],
+    }
+
     def __init__(self, loja_id, codigo_pagamento=None, eh_listagem=False):
         self.campos = ['ativo', 'valor_minimo_aceitado', 'desconto', 'desconto_valor', 'aplicar_no_total', 'json']
         self.codigo_gateway = CODIGO_GATEWAY
