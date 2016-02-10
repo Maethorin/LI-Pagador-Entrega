@@ -38,7 +38,7 @@ class Malote(entidades.Malote):
 
 class ConfiguracaoMeioPagamento(entidades.ConfiguracaoMeioPagamento):
     modos_pagamento_aceitos = {
-        'outros': ['entrega'],
+        #'outros': ['entrega'],
     }
 
     def __init__(self, loja_id, codigo_pagamento=None, eh_listagem=False):
